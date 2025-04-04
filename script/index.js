@@ -43,7 +43,7 @@ const showPosts = posts => {
             <span><i class="fa-regular fa-clock fa-lg"></i></span>
             <span>${post.posted_time} min</span>
             </p>
-            <button class="py-1 px-2 rounded-full bg-[#10B981]"><i class="fa-regular fa-envelope-open fa-lg"></i></button>
+            <button onclick = "displayPostsToRead('${post.title}','${post.view_count}')" class="py-1 px-2 rounded-full bg-[#10B981]"><i class="fa-regular fa-envelope-open fa-lg"></i></button>
             </div>
         </div>
         </div>
@@ -82,6 +82,23 @@ const displayLatestPosts = latests => {
         `
         latestContainer.appendChild(div);
     })
+}
+
+const displayPostsToRead = (postTitle, postView) => {
+    let markAsReadCounter = parseInt(document.getElementById("markAsReadCounter").innerText);
+    const markReadContainer = document.getElementById("markAsReadContainer");
+    const div = document.createElement("div");
+    div.classList.add("flex", "items-center",
+        "bg-[#FFFFFF]", "p-5", "rounded-lg", "font-medium");
+    div.innerHTML = `
+    <p class="text-lg">${postTitle}</p>
+    <p class="flex gap-2">
+            <span><i class="fa-regular fa-eye fa-lg"></i></span>
+            <span>${postView}</span>
+    </p>
+    `
+    markReadContainer.appendChild(div);
+    document.getElementById("markAsReadCounter").innerText = markAsReadCounter + 1;
 }
 
 loadLatestPosts()
