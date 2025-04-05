@@ -17,10 +17,11 @@ const showPosts = posts => {
         const div = document.createElement("div");
         div.innerHTML = `
         <div class = "flex items-center bg-[#797DFC1A] shadow-sm p-5 rounded-lg">
-        <div>
+        <div class="relative">
             <img
             src=${post.image} class="w-20 h-20 object-cover rounded-md"
             alt="Movie" />
+            <div class="absolute -top-2 -right-2">${post.isActive ? '🟢' : '🔴'}</div>
         </div>
         <div class="card-body">
             <p class="flex gap-5 text-sm">
@@ -88,7 +89,7 @@ const displayPostsToRead = (postTitle, postView) => {
     let markAsReadCounter = parseInt(document.getElementById("markAsReadCounter").innerText);
     const markReadContainer = document.getElementById("markAsReadContainer");
     const div = document.createElement("div");
-    div.classList.add("flex", "items-center",
+    div.classList.add("flex", "items-center", "justify-between",
         "bg-[#FFFFFF]", "p-5", "rounded-lg", "font-medium");
     div.innerHTML = `
     <p class="text-lg">${postTitle}</p>
@@ -100,6 +101,12 @@ const displayPostsToRead = (postTitle, postView) => {
     markReadContainer.appendChild(div);
     document.getElementById("markAsReadCounter").innerText = markAsReadCounter + 1;
 }
+
+document.getElementById("toReadContainer").addEventListener("click", () => {
+    const markReadContainer = document.getElementById("markAsReadContainer");
+    markReadContainer.innerHTML = "";
+    document.getElementById("markAsReadCounter").innerText = 0;
+})
 
 loadLatestPosts()
 loadPosts()
