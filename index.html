@@ -68,14 +68,14 @@
                             design.
                         </p>
 
-                        <label class="w-4/5 flex items-center rounded-full lg:py-6">
-                            <input type="text" id="searchPosts" class="input text-slate-600"
-                                placeholder="Search for anything...">
-                            <button onclick="" id="searchPostsBtn"
-                                class="btn bg-[#797DFC] text-white  hover:bg-blue-950">
+                        <div class="input input-bordered flex items-center gap-2 rounded-full">
+                            <input id="searchPosts" type="text" class="grow text-gray-500 "
+                                placeholder="Search Here Anything..." />
+                            <button id="searchPostsBtn"
+                                class="relative -right-3 btn rounded-full bg-primary text-white hover:text-primary hover:bg-blue-950">
                                 Search
                             </button>
-                        </label>
+                        </div>
 
                     </div>
                     <div
@@ -97,6 +97,7 @@
             </div>
         </section>
 
+
         <section class="container mx-auto w-11/12 lg:w-10/12 my-12 lg:my-24">
             <div class="flex lg:w-2/5 mx-auto flex-col items-center justify-center space-y-8 lg:my-12">
                 <h2 class="text-3xl lg:text-5xl font-bold text-center">
@@ -114,11 +115,11 @@
                     <!-- demo card showing without dynamic value  -->
 
 
-
-                    <div class="flex w-full justify-center">
-                        <span id="postLoader"></span>
+                    <div id="postLoader" class="hidden w-full justify-center">
+                        <span class="loading loading-spinner loading-md"></span>
+                        <span class="loading loading-spinner loading-lg"></span>
+                        <span class="loading loading-spinner loading-xl"></span>
                     </div>
-                    <!-- dynamic content -->
                 </div>
                 <div class="lg:w-4/12">
                     <div class="p-6 space-y-4 bg-[#F3F3F5] rounded-3xl">

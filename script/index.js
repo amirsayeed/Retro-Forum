@@ -1,6 +1,8 @@
 const loadPosts = async () => {
+    showLoader();
     const response = await fetch("https://openapi.programming-hero.com/api/retro-forum/posts");
     const data = await response.json();
+    hideLoader();
     showPosts(data.posts);
 }
 
@@ -13,6 +15,7 @@ const loadLatestPosts = async () => {
 const showPosts = posts => {
     //console.log(posts);
     const postContainer = document.getElementById("post-container");
+    postContainer.innerHTML = "";
     posts.map(post => {
         const div = document.createElement("div");
         div.innerHTML = `
@@ -49,8 +52,9 @@ const showPosts = posts => {
         </div>
         </div>
         `
-        postContainer.appendChild(div)
-    })
+        postContainer.appendChild(div);
+    });
+
 }
 
 const displayLatestPosts = latests => {
@@ -107,6 +111,27 @@ document.getElementById("toReadContainer").addEventListener("click", () => {
     markReadContainer.innerHTML = "";
     document.getElementById("markAsReadCounter").innerText = 0;
 })
+
+const showLoader = () => {
+    const loader = document.getElementById("postLoader");
+    loader.style.display = "flex";
+}
+
+const hideLoader = () => {
+    document.getElementById("postLoader").style.display = "none";
+}
+
+const searchByCategory = async (categoryName = "") => {
+    const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryName}`);
+    const data = await response.json();
+    showPosts(data.posts);
+}
+
+document.getElementById("searchPostsBtn").addEventListener("click", () => {
+    const inputFieldText = document.getElementById("searchPosts").value;
+    searchByCategory(inputFieldText);
+})
+
 
 loadLatestPosts()
 loadPosts()
