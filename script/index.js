@@ -14,6 +14,10 @@ const loadLatestPosts = async () => {
 
 const showPosts = posts => {
     //console.log(posts);
+    if (posts.length === 0) {
+        alert("No posts found...");
+        return;
+    }
     const postContainer = document.getElementById("post-container");
     postContainer.innerHTML = "";
     posts.map(post => {
@@ -121,7 +125,7 @@ const hideLoader = () => {
     document.getElementById("postLoader").style.display = "none";
 }
 
-const searchByCategory = async (categoryName = "") => {
+const searchByCategory = async (categoryName) => {
     const response = await fetch(`https://openapi.programming-hero.com/api/retro-forum/posts?category=${categoryName}`);
     const data = await response.json();
     showPosts(data.posts);
@@ -129,7 +133,11 @@ const searchByCategory = async (categoryName = "") => {
 
 document.getElementById("searchPostsBtn").addEventListener("click", () => {
     const inputFieldText = document.getElementById("searchPosts").value;
-    searchByCategory(inputFieldText);
+    if (inputFieldText) {
+        searchByCategory(inputFieldText);
+    } else {
+        alert("Please enter a category...");
+    }
 })
 
 
